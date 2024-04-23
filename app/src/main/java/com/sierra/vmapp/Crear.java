@@ -4,6 +4,7 @@ import DAO.PersonaDAO;
 import Objects.Persona;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,19 +12,28 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import etc.Genero;
+import etc.MySQL;
+import etc.SQLInsertionThread;
+
+import java.sql.SQLOutput;
 
 public class Crear extends AppCompatActivity implements View.OnClickListener{
 
-    EditText editTextNombre = (EditText)findViewById(R.id.editTextPersona);
-    EditText editTextFechaNacimiento = (EditText)findViewById(R.id.editTextDate);
-    EditText editTextDomicilio = (EditText)findViewById(R.id.editTextDomicilio);
-    EditText editTextMovil = (EditText)findViewById(R.id.editTextMovil);
-    EditText editTextEmail = (EditText)findViewById(R.id.editTextTextEmailAddress);
+    private Button buttonCrear;
+    private EditText editTextNombre;
+    private EditText editTextFechaNacimiento;
+    private EditText editTextDomicilio;
+    private EditText editTextMovil;
+    private EditText editTextEmail;
+    private Spinner spinnerCrear;
 
-    ArrayAdapter<String> adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear);
@@ -33,10 +43,26 @@ public class Crear extends AppCompatActivity implements View.OnClickListener{
 
 
 
+        System.out.println("Thread id: " + Thread.currentThread().getId());
+        System.out.println("Thread name: " + Thread.currentThread().getName());
+
+
+        editTextNombre = findViewById(R.id.editTextPersona);
+        editTextFechaNacimiento = findViewById(R.id.editTextDate);
+        editTextDomicilio = findViewById(R.id.editTextDomicilio);
+        editTextMovil = findViewById(R.id.editTextMovil);
+        editTextEmail = findViewById(R.id.editTextTextEmailAddress);
+
+        spinnerCrear = findViewById(R.id.spinner_crear);
+
+        buttonCrear = findViewById(R.id.button_crear_persona);
+        buttonCrear.setOnClickListener(this);
+
+
     }
 
 
-    @SuppressLint("NonConstantResourceId")
+
     @Override
     public void onClick(View v) {
 
@@ -50,10 +76,18 @@ public class Crear extends AppCompatActivity implements View.OnClickListener{
             String domicilioStr = editTextDomicilio.getText().toString();
             String movilStr = editTextMovil.getText().toString();
             String emailStr = editTextEmail.getText().toString();
+            Genero genero = spinnerCrear.getSelectedItem().toString().equals("Hombre") ? Genero.HOMBRE : Genero.MUJER;
 
-            PersonaDAO personaDAO = PersonaDAO.getInstance();
 
-            personaDAO.insert(new Persona(nombreStr, fechaNacimientoStr, domicilioStr, movilStr, emailStr));
+
+            System.out.println("DEBUG" + nombreStr + " " + fechaNacimientoStr + " " + domicilioStr + " " + movilStr + " " + emailStr + " " + genero);
+
+            Persona RetrievedFields = new Persona(nombreStr, fechaNacimientoStr, domicilioStr, movilStr, emailStr, genero);
+
+            SQLInsertionThread sqlInsertionThread = new SQLInsertionThread(RetrievedFields);
+            sqlInsertionThread.start();
+
+
 
 
 

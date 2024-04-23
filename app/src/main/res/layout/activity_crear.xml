@@ -17,7 +17,7 @@
             app:layout_constraintBottom_toTopOf="@+id/editTextMovil" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="101dp" android:layout_marginEnd="101dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            android:hint="Domicilio"/>
+            android:hint="Domicilio" android:autofillHints=""/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="101dp" app:layout_constraintHorizontal_bias="0.0"
             android:hint="Movil" android:layout_marginBottom="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"/>
+            app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress" android:autofillHints=""/>
     <TextView
             android:layout_width="100dp"
             android:layout_height="27dp"
@@ -61,7 +61,8 @@
             android:layout_marginStart="101dp" android:layout_marginEnd="101dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="15dp"
             app:layout_constraintBottom_toTopOf="@+id/editTextDomicilio"
-            app:layout_constraintHorizontal_bias="0.0" android:hint="Persona"/>
+            app:layout_constraintHorizontal_bias="0.0" android:hint="Persona" android:autofillHints=""
+    />
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +74,7 @@
             android:layout_marginStart="101dp" android:layout_marginEnd="101dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="15dp" app:layout_constraintBottom_toTopOf="@+id/editTextDate"
-            android:minHeight="48dp"/>
+            android:minHeight="48dp" android:autofillHints="" app:layout_constraintHorizontal_bias="0.0"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +86,7 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="101dp"
             android:layout_marginEnd="101dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="9dp" app:layout_constraintBottom_toTopOf="@+id/spinner_crear"
-            android:minHeight="48dp"/>
+            android:minHeight="48dp" android:autofillHints="" app:layout_constraintHorizontal_bias="0.0"/>
     <Spinner
             android:layout_width="209dp"
             android:layout_height="48dp" android:id="@+id/spinner_crear"

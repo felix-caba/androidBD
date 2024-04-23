@@ -2,43 +2,92 @@ package etc;
 
 import java.sql.*;
 
-public class MySQL {
 
-    static final String DDBC_DRIVER = "com.mysql.jdbc.Driver";
+
+
+public class MySQL{
+
+    // SINGLETON
+
+    private static MySQL instance = null;
+
+    public static MySQL getInstance(){
+
+        if(instance == null){
+            instance = new MySQL();
+        }
+
+        return instance;
+    }
+
+
+
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/vmapp";
-    public static String USER = "root";
+    static final String DB_URL = "jdbc:mysql://192.168.1.151:3306/vmapp";
+    public static String USER = "rootDB";
     public static String PASS = "";
     static private Connection conex ;
     private Statement stmt;
     private ResultSet rs;
     private ResultSetMetaData meta;
 
-    public MySQL() {
+    private MySQL() {
+
+
     }
 
-    public static boolean conectar(String user, String pass, String db) {
+    public void waitForConnection(){
+       while (conex == null){
+           try {
+               System.out.println("Esperando conexión");
+               Thread.sleep(3000);
+
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+       }
+
+    }
+
+
+
+    public boolean conectar() {
+
         try {
 
-            Class.forName(DDBC_DRIVER);
-            conex = DriverManager.getConnection(DB_URL + db, user, pass);
+            System.out.println("En el try de conectar()");
+
+            Class.forName(JDBC_DRIVER);
+
+            System.out.println("Conectando a la base de datos... Driver Get Connection");
+
+            conex = DriverManager.getConnection(DB_URL, USER, PASS);
+
             return true;
+
 
         } catch (Exception e) {
             //Handle errors for Class.forName
+
+            System.out.println("Error en la conexión");
+
             e.printStackTrace();
-            return false;
+
+
+
         }
+
+        return false;
 
     }
 
 
 
-    public static Connection getConex() {
+    public Connection getConex() {
         return conex;
     }
 
-    public static void cierra_conexion() {
+    public void cierra_conexion() {
         try {
             if (conex != null) {
                 conex.close();

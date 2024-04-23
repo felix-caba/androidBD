@@ -7,6 +7,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonCrear;
@@ -14,6 +15,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -40,12 +44,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.button_crear) {
 
             Intent intentCrear = new Intent(this, Crear.class);
-
             startActivity(intentCrear);
+
         } else if (id == R.id.button_modificar) {
 
             Intent intentModificar = new Intent(this, Modificar.class);
             startActivity(intentModificar);
+
         }
     }
 

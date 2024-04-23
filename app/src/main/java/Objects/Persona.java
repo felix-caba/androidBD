@@ -12,13 +12,14 @@ public class Persona{
     private String fechaNacimiento;
     private Genero genero;
 
-    public Persona(String nombreStr, String fechaNacimientoStr, String domicilioStr, String movilStr, String emailStr) {
+    public Persona(String nombreStr, String fechaNacimientoStr, String domicilioStr, String movilStr, String emailStr, Genero genero) {
 
         this.nombre = nombreStr;
         this.fechaNacimiento = fechaNacimientoStr;
         this.domicilio = domicilioStr;
         this.movil = movilStr;
         this.email = emailStr;
+        this.genero = genero;
 
     }
 
